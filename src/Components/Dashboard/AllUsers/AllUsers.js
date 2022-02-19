@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Dropdown, DropdownButton, Table } from 'react-bootstrap';
+import { Dropdown, DropdownButton, Spinner, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -13,12 +13,11 @@ const AllUsers = () => {
         fetch("http://localhost:3003/users")
           .then((res) => res.json())
             .then((data) => setUsers(data))
-        
+        .finally(()=>setIsLoading(false))
     }, [])
     const handleDelete = (id) => {
         axios.delete(`http://localhost:3003/users/${id}`)
-            .then(res => {
-                if (res) {
+            
                 Swal.fire({
                   position: "center",
                   icon: "success",
@@ -26,8 +25,6 @@ const AllUsers = () => {
                   showConfirmButton: false,
                   timer: 2000,
                 });
-            }
-        })
     }
     return (
       <div>
@@ -41,6 +38,18 @@ const AllUsers = () => {
               <th>Manage User</th>
             </tr>
           </thead>
+          {isLoading && (
+            <div>
+              <Spinner animation="grow" variant="primary" />
+              <Spinner animation="grow" variant="secondary" />
+              <Spinner animation="grow" variant="success" />
+              <Spinner animation="grow" variant="danger" />
+              <Spinner animation="grow" variant="warning" />
+              <Spinner animation="grow" variant="info" />
+              <Spinner animation="grow" variant="light" />
+              <Spinner animation="grow" variant="dark" />
+            </div>
+          )}
           {users?.map((user) => (
             <tbody key={user.id}>
               <tr>
@@ -55,14 +64,17 @@ const AllUsers = () => {
                     title="Manage Order"
                   >
                     <Dropdown.Item href="#/action-1">
-                     
-                        <NavLink style={{
+                      <NavLink
+                        style={{
                           color: "white",
                           border: "0px",
                           backgroundColor: "green",
                           borderRadius: "3px",
-                        }} to={`/update/${user.id}`}>Update User</NavLink>
-                      
+                        }}
+                        to={`/update/${user.id}`}
+                      >
+                        Update User
+                      </NavLink>
                     </Dropdown.Item>
 
                     <Dropdown.Item href="#/action-3">

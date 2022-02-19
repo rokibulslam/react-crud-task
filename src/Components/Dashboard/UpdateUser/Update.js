@@ -23,14 +23,21 @@ const Update = (params) => {
       console.log(user)
     axios
       .put(`http://localhost:3003/users/${id}`, user)
-      .then((res) => console.log(res));
-  };
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "User Updated",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+  }
 
   return (
     <div
       style={{ height: "100vh" }}
       className="d-flex justify-content-center align-items-center"
     >
+      
       <Form onSubmit={handleOnSubmit} className="w-50 ">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
