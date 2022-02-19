@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Rokibul Islam",
+      "email": "rokibul@gmail.com",
+      "phone": "012132434",
+      "age": "23"
+    },
+    {
+      "name": "MD Rokibul Islam",
+      "email": "rokibul@gmail.com",
+      "age": "24",
+      "phone": "01612225141",
+      "id": "JHlx3GP"
+    }
+  ]
+}
