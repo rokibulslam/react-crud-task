@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import Swal from "sweetalert2";
 
 const AddUser = () => {
     const [user, setUser] = useState();
@@ -14,13 +15,23 @@ const AddUser = () => {
         newUserData[name] = value;
         setUser(newUserData);
         console.log(user)
-             e.preventDefault();
+        e.preventDefault();
     }
 
     const handleOnSubmit = () => {
           axios
             .post("http://localhost:3003/users", user)
-            .then((res) => console.log(res));
+             
+                   
+                      Swal.fire({
+                          position: "center",
+                          icon: "success",
+                          title: "User Added",
+                          showConfirmButton: false,
+                          timer: 3000,
+                      })
+                  
+
        
    }
 
@@ -72,7 +83,7 @@ const AddUser = () => {
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            Submit
+            Add User
           </Button>
         </Form>
       </div>
